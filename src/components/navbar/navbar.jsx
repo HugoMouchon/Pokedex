@@ -12,30 +12,32 @@ import logo from '../../assets/images/logo/logo_pokeAPI.svg'
 
 export default function navBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar className={style.navBar} position="static" color="default">
-        <Toolbar>
-          <Logo image={logo} />
+    <nav>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar className={style.navBar} position="static">
+          <Toolbar>
+            <Logo image={logo}/>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
 
-          </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            </Typography>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </nav>
   );
 }

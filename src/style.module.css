@@ -1,9 +1,23 @@
 .container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100vh;
-    background-color: #E0E0E0;
+    background-color: #6493EB;
 }
 
-.navbar {
+.container_navbar {
     width: 100vw;
+}
+.container_details {
+    display: flex;
+    flex-direction: column;
+}
+
+.details {
+    flex: 1;
+}
+
+.statistique {
+    flex: 1;
 }
