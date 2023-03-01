@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: #E0E0E0;
+}
+
+.navbar {
+    width: 100vw;
+}
