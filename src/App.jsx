@@ -6,23 +6,18 @@ import { pokemonAPI } from './api/pokemonAPI';
 
 export function App() {
 
-  const [pokemonList, setPokemonList] = useState([]);
+  const [imagePokemon, setImagePokemon] = useState([]);
 
   async function fetchPokemonImage(pokemonID) {
-    const pokemons = await pokemonAPI.fetchPokemonImage(pokemonID);
-    if (Array.isArray(pokemons) && pokemons.length > 0) {
-      setPokemonList(pokemons[0]);
+    const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
+    if (imageURL.length > 0) {
+      setImagePokemon(imageURL);
     }
   }
 
   useEffect(() => {
     fetchPokemonImage(35);
   }, []);
-
-  useEffect(() => {
-    console.log(pokemonList);
-  }, [pokemonList]);
-
 
   return (
     <div className={style.container}>
@@ -32,13 +27,12 @@ export function App() {
         </div>
       </div>
 
-        <div className={style.details}>
-          <h1>coucou</h1>
-          <img src={[pokemonList]} alt="" />
-        </div>
-        <div className={style.statistique}>
-          <h1>Coucou</h1>
-        </div>
+      <div className={style.details}>
+        <img src={imagePokemon} alt="" />
+      </div>
+      <div className={style.statistique}>
+        <h1>Coucou</h1>
+      </div>
 
     </div>
   );
