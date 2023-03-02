@@ -7,7 +7,7 @@ import PokemonStats from './components/stats/pokemonStats';
 
 export function App() {
 
-  let test = 28;
+  let test = 12;
 
   const [imagePokemon, setImagePokemon] = useState();
   const [namePokemon, setNamePokemon] = useState();
@@ -111,7 +111,7 @@ export function App() {
     }
   }
 
-  // Fonction permettant de convertir la mesure "ied" en "mètres" 
+  // Fonction permettant de convertir la mesure "pied" en "mètres" 
   function converterFeetToMeter(heightPokemon) {
     const meter = heightPokemon / 3.048
     return meter.toFixed(2);
@@ -124,30 +124,31 @@ export function App() {
           <NavBar />
         </div>
       </div>
+      <div className={style.container_details}>
+        <div className={style.details}>
+          <img className={style.image} src={imagePokemon} alt="" />
+          <h1>{namePokemon}</h1>
+          <p>Numéro: {addZeros(orderPokemon)}</p>
+          <p>Poid: {weightPokemon} Kg</p>
+          <p>Hauteur: {converterFeetToMeter(heightPokemon)} mètres</p>
 
-      <div className={style.details}>
-        <img className={style.image} src={imagePokemon} alt="" />
-        <h1>Pokemon: {namePokemon}</h1>
-        <p>Numéro: {addZeros(orderPokemon)}</p>
-        <p>Poid: {weightPokemon} Kg</p>
-        <p>Hauteur: {converterFeetToMeter(heightPokemon)} mètres</p>
+          <div className={style.container_abilities}>
+            <p>Abilitées:</p>
+            {abilitiesPokemon && abilitiesPokemon.map((ability) => (
+              <div key={ability.slot}>
+                <p>{ability.ability.name} /</p>
+              </div>
+            ))}
+          </div>
 
-        <div className={style.container_abilities}>
-          <p>Abilitées:</p>
-          {abilitiesPokemon && abilitiesPokemon.map((ability) => (
-            <div key={ability.slot}>
-              <p>{ability.ability.name} /</p>
-            </div>
-          ))}
-        </div>
-
-        <div className={style.container_types}>
-          <p>Types:</p>
-          {typesPokemon && typesPokemon.map((type) => (
-            <div key={type.slot}>
-              <p>{type.type.name} - </p>
-            </div>
-          ))}
+          <div className={style.container_types}>
+            <p>Types:</p>
+            {typesPokemon && typesPokemon.map((type) => (
+              <div key={type.slot}>
+                <p>{type.type.name} - </p>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

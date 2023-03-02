@@ -1,3 +1,4 @@
+import { Progress, Space } from 'antd';
 import style from './style.module.css';
 
 export default function PokemonStats({ stats }) {
@@ -12,17 +13,12 @@ export default function PokemonStats({ stats }) {
                     ))}
                 </ul>
             </div>
-            <div>
-                
-            </div>
-            <div>
-                <ul>
-                    {stats.map((stat) => (
-                        <li key={stat.stat.url}>
-                            {stat.base_stat}
-                        </li>
-                    ))}
-                </ul>
+            <div className={style.progressBar}>
+                {stats.map((stat) => (
+                    <li key={stat.stat.url}>
+                        <Progress percent={stat.base_stat} status="active" width={"100vw"} />
+                    </li>
+                ))}
             </div>
         </div>
     );
