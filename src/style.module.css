@@ -23,6 +23,19 @@
     height: 200px;
 }
 
+.container_abilities {
+    display: flex;
+}
+
+p {
+    margin: 1px;
+}
+
+.container_types {
+    display: flex;
+}
+
+
 /* Section stattistiques du Pokemon*/
 .statistique {
     flex: 1;
