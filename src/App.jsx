@@ -88,6 +88,7 @@ export function App() {
     fetchPokemonOrder(test);
   }, [])
 
+  // Fonction permettant de récupérer les stats du Pokemon
   async function fetchPokemonStats(pokemonID) {
     const stats = await pokemonAPI.fetchPokemonStats(pokemonID);
     setStatsPokemon(stats);
@@ -96,6 +97,7 @@ export function App() {
   useEffect(() => {
     fetchPokemonStats(test);
   }, [])
+
 
   // Fonction permettant d'ajouter un hashtag et un ou des zéros devant l'ordre du pokemon
   function addZeros(orderPokemon) {
@@ -150,8 +152,9 @@ export function App() {
 
       </div>
       <div className={style.statistique}>
-        <PokemonStats test={test} />
-        <h1>Coucou</h1>
+        <PokemonStats
+          stats={statsPokemon}
+        />
       </div>
 
     </div>
