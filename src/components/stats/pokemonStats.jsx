@@ -1,10 +1,8 @@
-import { Divider, Progress, Space } from 'antd';
+import { Divider, Progress } from 'antd';
 import style from './style.module.scss';
 
 
 export default function PokemonStats({ stats }) {
-
-
     return (
         <div className={style.container}>
             <div>

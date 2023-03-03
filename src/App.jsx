@@ -1,13 +1,15 @@
 import style from './style.module.scss';
 import './global.scss';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
+import ChipsPokemon from './components/chips/chipsPokemon';
+
 
 export function App() {
 
-  let test = 1;
+  let test = 137;
 
   const [imagePokemon, setImagePokemon] = useState();
   const [namePokemon, setNamePokemon] = useState();
@@ -58,10 +60,10 @@ export function App() {
     fetchPokemonHeight(test);
   }, [])
 
-  // Fonction permettant de récupérer les abilitées du Pokemon et qui en affiche 4 maximum
+  // Fonction permettant de récupérer les abilitées du Pokemon et qui en affiche 1 maximum
   async function fetchPokemonAbilities(pokemonID) {
     const abilities = await pokemonAPI.fetchPokemonAbilities(pokemonID);
-    setAbilitiesPokemon(abilities.slice(0, 3));
+    setAbilitiesPokemon(abilities.slice(0, 1));
   }
 
   useEffect(() => {
@@ -120,37 +122,43 @@ export function App() {
   return (
     <div className={style.container}>
       <div className={style.header}>
-        <div className={style.container_navbar}>
-          <NavBar />
-        </div>
+        <NavBar />
       </div>
       <div className={style.container_details}>
-        <p>Numéro: {addZeros(orderPokemon)}</p>
-        <div className={style.image}>
-          <img className={style.image} src={imagePokemon} alt="" />
-        </div>
+
         <div className={style.container_nomination2}>
           <div className={style.container_types}>
-            <p>Types:</p>
             {typesPokemon && typesPokemon.map((type) => (
               <div key={type.slot}>
-                <span>{type.type.name} - </span>
+                <ChipsPokemon types={typesPokemon} />
               </div>
+              // {type.type.name}
             ))}
           </div>
           <h1>{namePokemon}</h1>
-        </div>
-        <div className={style.container_nomination1}>
-          <p>Poid: {weightPokemon} Kg</p>
-          <p>Hauteur: {converterFeetToMeter(heightPokemon)} mètres</p>
-          <div className={style.container_abilities}>
-            <p>Abilitées:</p>
-            {abilitiesPokemon && abilitiesPokemon.map((ability) => (
-              <div key={ability.slot}>
-                <p>{ability.ability.name} /</p>
+          <div className={style.container_nomination1}>
+            <div>
+              <p>Poid : </p>
+              <p>Hauteur : </p>
+              <p>Abilitées :</p>
+            </div>
+            <div className={style.container_abilities}>
+              <p>{weightPokemon} Kg</p>
+              <p>{converterFeetToMeter(heightPokemon)} M</p>
+              <div className={style.ability}>
+                {abilitiesPokemon && abilitiesPokemon.map((ability) => (
+                  <div key={ability.slot}>
+                    <span>{ability.ability.name}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
+        </div>
+
+        <div className={style.container_image}>
+          <img className={style.image} src={imagePokemon} alt="" />
+          <span className={style.number}>{addZeros(orderPokemon)}</span>
         </div>
       </div>
       <div className={style.statistique}>

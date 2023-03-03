@@ -1,4 +1,5 @@
 @use "./sass/_colors" as c;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 
 .container {
     display: flex;
@@ -13,46 +14,77 @@
     );;
 }
 
-.container_navbar {
+.header {
     width: 100vw;
 }
 
-.container_details {
-    display: flex;
-    flex-direction: column;
-}
-
 /* Section details du Pokemon*/
-.details {
+.container_details {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.container_nomination {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    flex: 1;
-    width: 100%;
 }
 
-h1 {
-    text-transform: capitalize;
-}
-
-.image {
-    height: 160px;
-    width: 100%;
-}
-
-.container_abilities {
+.container_nomination1 {
     display: flex;
-}
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: c.$text-color;
 
-p {
-    margin: 1px;
+    p {
+        margin: 0;
+    }
 }
 
 .container_types {
     display: flex;
+    align-items: center;
 }
 
+.container_abilities {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
 
+h1 {
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    margin-top: 20px; /* ajoute une marge au-dessus du nom */
+    color: c.$text-color;
+    margin-top: 0;
+}
+
+.container_image {
+    width: 200px; /* définit une largeur pour l'image */
+    margin: 0 30px; /* supprime la marge gauche et ajoute une marge droite */
+    z-index: 0;
+}
+
+.image {
+    width: 100%;
+}
+
+.number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 200px;
+    color: #ffffff47;
+    z-index: -1;
+
+}
 /* Section stattistiques du Pokemon*/
 .statistique {
     flex: 1;
