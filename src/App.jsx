@@ -1,5 +1,5 @@
-import style from './style.module.css';
-import './global.css';
+import style from './style.module.scss';
+import './global.scss';
 import React, { useEffect, useState } from 'react'
 import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
@@ -7,7 +7,7 @@ import PokemonStats from './components/stats/pokemonStats';
 
 export function App() {
 
-  let test = 12;
+  let test = 1;
 
   const [imagePokemon, setImagePokemon] = useState();
   const [namePokemon, setNamePokemon] = useState();
@@ -125,13 +125,24 @@ export function App() {
         </div>
       </div>
       <div className={style.container_details}>
-        <div className={style.details}>
+        <p>Numéro: {addZeros(orderPokemon)}</p>
+        <div className={style.image}>
           <img className={style.image} src={imagePokemon} alt="" />
+        </div>
+        <div className={style.container_nomination2}>
+          <div className={style.container_types}>
+            <p>Types:</p>
+            {typesPokemon && typesPokemon.map((type) => (
+              <div key={type.slot}>
+                <span>{type.type.name} - </span>
+              </div>
+            ))}
+          </div>
           <h1>{namePokemon}</h1>
-          <p>Numéro: {addZeros(orderPokemon)}</p>
+        </div>
+        <div className={style.container_nomination1}>
           <p>Poid: {weightPokemon} Kg</p>
           <p>Hauteur: {converterFeetToMeter(heightPokemon)} mètres</p>
-
           <div className={style.container_abilities}>
             <p>Abilitées:</p>
             {abilitiesPokemon && abilitiesPokemon.map((ability) => (
@@ -140,17 +151,7 @@ export function App() {
               </div>
             ))}
           </div>
-
-          <div className={style.container_types}>
-            <p>Types:</p>
-            {typesPokemon && typesPokemon.map((type) => (
-              <div key={type.slot}>
-                <p>{type.type.name} - </p>
-              </div>
-            ))}
-          </div>
         </div>
-
       </div>
       <div className={style.statistique}>
         <PokemonStats

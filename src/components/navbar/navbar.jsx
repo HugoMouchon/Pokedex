@@ -1,43 +1,21 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
-import style from './style.module.css';
-import { Logo } from '../logo/logo';
-import logo from '../../assets/images/logo/logo_pokeAPI.svg'
+import React from "react";
+import logo from "../../assets/images/logo/logo_pokeAPI.svg";
+import style from './style.module.scss';
 
-
-export default function navBar() {
+function NavigationBar () {
   return (
-    <nav>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar className={style.navBar} position="static">
-          <Toolbar>
-            <Logo image={logo}/>
-
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-
-            </Typography>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </Box>
+    <nav className={style.navbar}>
+      <div className={style.navbar__logo}>
+        <img src={logo} alt="Logo" />
+      </div>
+      <div className={style.navbar__search}>
+        <form>
+          <input type="text" placeholder="Taper le nom du Pokemon" />
+          <button type="submit">Rechercher</button>
+        </form>
+      </div>
     </nav>
   );
 }
+
+export default NavigationBar;
