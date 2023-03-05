@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
-import ChipsPokemon from './components/chips/chipsPokemon';
-
+import BadgePokemon from './components/badge/badgePokemon';
+import { Button } from '@mui/material';
+import { ArrowBackIosNewRounded, ArrowRightAltRounded, ArrowRightAltSharp, ArrowRightRounded, KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowRight, Send } from '@mui/icons-material';
 
 export function App() {
 
-  let test = 137;
+  let test = 1;
 
   const [imagePokemon, setImagePokemon] = useState();
   const [namePokemon, setNamePokemon] = useState();
@@ -20,6 +21,17 @@ export function App() {
   const [orderPokemon, setOrderPokemon] = useState();
   const [statsPokemon, setStatsPokemon] = useState([]);
 
+  const [nextPokemon, setNextPokemon] = useState(1);
+
+  const nextClick = () => {
+    setNextPokemon(nextPokemon + 1);
+  }
+
+  const previousClick = () => {
+    setNextPokemon(nextPokemon - 1);
+  }
+
+
   // Fonction permettant de récupérer l'image du Pokemon
   async function fetchPokemonImage(pokemonID) {
     const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
@@ -27,18 +39,20 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonImage(test);
-  }, []);
+    fetchPokemonImage(nextPokemon);
+  }, [nextPokemon]);
 
   // Fonction permettant de récupérer le nom du Pokemon
   async function fetchPokemonName(pokemonID) {
     const name = await pokemonAPI.fetchPokemonName(pokemonID);
-    setNamePokemon(name);
+    if (name.length > 0) {
+      setNamePokemon(name);
+    }
   }
 
   useEffect(() => {
-    fetchPokemonName(test);
-  }, [])
+    fetchPokemonName(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer le poid du Pokemon
   async function fetchPokemonWeight(pokemonID) {
@@ -47,8 +61,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonWeight(test);
-  }, [])
+    fetchPokemonWeight(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer la hauteur du Pokemon
   async function fetchPokemonHeight(pokemonID) {
@@ -57,8 +71,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonHeight(test);
-  }, [])
+    fetchPokemonHeight(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer les abilitées du Pokemon et qui en affiche 1 maximum
   async function fetchPokemonAbilities(pokemonID) {
@@ -67,18 +81,18 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonAbilities(test);
-  }, [])
+    fetchPokemonAbilities(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer le ou les types du Pokemon
   async function fetchPokemonTypes(pokemonID) {
     const types = await pokemonAPI.fetchPokemonTypes(pokemonID);
-    setTypesPokemon(types);
+    setTypesPokemon(types.slice(0, 1));
   }
 
   useEffect(() => {
-    fetchPokemonTypes(test);
-  }, [])
+    fetchPokemonTypes(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer le numéro d'ordre du Pokemon
   async function fetchPokemonOrder(pokemonID) {
@@ -87,8 +101,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonOrder(test);
-  }, [])
+    fetchPokemonOrder(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant de récupérer les stats du Pokemon
   async function fetchPokemonStats(pokemonID) {
@@ -97,9 +111,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonStats(test);
-  }, [])
-
+    fetchPokemonStats(nextPokemon);
+  }, [nextPokemon])
 
   // Fonction permettant d'ajouter un hashtag et un ou des zéros devant l'ordre du pokemon
   function addZeros(orderPokemon) {
@@ -119,54 +132,82 @@ export function App() {
     return meter.toFixed(2);
   }
 
+  // Fonction permettant de convertir la mesure "pound" en "kilos" 
+  function converterToKilos(weightPokemon) {
+    const kilos = weightPokemon / 10
+    return kilos.toFixed(2);
+  }
+
   return (
     <div className={style.container}>
       <div className={style.header}>
-        <NavBar />
+        <NavBar onSubmit={fetchPokemonName} />
       </div>
-      <div className={style.container_details}>
 
-        <div className={style.container_nomination2}>
-          <div className={style.container_types}>
-            {typesPokemon && typesPokemon.map((type) => (
-              <div key={type.slot}>
-                <ChipsPokemon types={typesPokemon} />
+      <div className={style.container_PreviousNext}>
+
+      <div className={style.previous}>
+          <Button
+            onClick={previousClick}
+            variant="contained"
+            startIcon={<KeyboardArrowLeft />}
+          >
+            Suivant {orderPokemon - 1}
+          </Button>
+        </div>
+
+        <div className={style.container_details}>
+          <div className={style.container_nomination2}>
+            <div className={style.container_types}>
+              {typesPokemon && typesPokemon.map((type) => (
+                <div key={type.slot}>
+                  <BadgePokemon types={typesPokemon} />
+                </div>
+              ))}
+            </div>
+            <h1>{namePokemon}</h1>
+            <div className={style.container_nomination1}>
+              <div>
+                <p>Poid : </p>
+                <p>Hauteur : </p>
+                <p>Abilitées :</p>
               </div>
-              // {type.type.name}
-            ))}
+              <div className={style.container_abilities}>
+                <p>{converterToKilos(weightPokemon)} Kg</p>
+                <p>{converterFeetToMeter(heightPokemon)} M</p>
+                <div className={style.ability}>
+                  {abilitiesPokemon && abilitiesPokemon.map((ability) => (
+                    <div key={ability.slot}>
+                      <span>{ability.ability.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <h1>{namePokemon}</h1>
-          <div className={style.container_nomination1}>
-            <div>
-              <p>Poid : </p>
-              <p>Hauteur : </p>
-              <p>Abilitées :</p>
-            </div>
-            <div className={style.container_abilities}>
-              <p>{weightPokemon} Kg</p>
-              <p>{converterFeetToMeter(heightPokemon)} M</p>
-              <div className={style.ability}>
-                {abilitiesPokemon && abilitiesPokemon.map((ability) => (
-                  <div key={ability.slot}>
-                    <span>{ability.ability.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+
+          <div className={style.container_image}>
+            <img className={style.image} src={imagePokemon} alt="" />
+            <span className={style.number}>{addZeros(orderPokemon)}</span>
           </div>
         </div>
 
-        <div className={style.container_image}>
-          <img className={style.image} src={imagePokemon} alt="" />
-          <span className={style.number}>{addZeros(orderPokemon)}</span>
+        <div className={style.next}>
+          <Button
+            onClick={nextClick}
+            variant="contained"
+            endIcon={<KeyboardArrowRight />}
+          >
+            Suivant {orderPokemon +1}
+          </Button>
         </div>
+
       </div>
       <div className={style.statistique}>
         <PokemonStats
           stats={statsPokemon}
         />
       </div>
-
     </div>
   );
 }

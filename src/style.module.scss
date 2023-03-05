@@ -1,17 +1,21 @@
 @use "./sass/_colors" as c;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 
+.container_PreviousNext {
+    display: flex;
+    align-items: center;
+}
+
 .container {
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background: rgb(112, 209, 136);
-    background: linear-gradient(
-      180deg,
-      rgba(112, 209, 136, 1) 20%,
-      rgba(0, 107, 18, 1) 100%
-    );;
+    background: linear-gradient(180deg, rgb(126, 215, 155) 20%, rgb(27, 135, 64) 100%);
+
+    span {
+        text-transform: capitalize;
+    }
 }
 
 .header {
@@ -19,6 +23,7 @@
 }
 
 /* Section details du Pokemon*/
+
 .container_details {
     position: relative;
     display: flex;
@@ -44,6 +49,10 @@
     }
 }
 
+.container_nomination2 {
+    z-index: 1;
+}
+
 .container_types {
     display: flex;
     align-items: center;
@@ -60,18 +69,19 @@ h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
     font-size: 3rem;
-    margin-top: 20px; /* ajoute une marge au-dessus du nom */
+    margin-top: 20px;
     color: c.$text-color;
     margin-top: 0;
 }
 
 .container_image {
-    width: 200px; /* définit une largeur pour l'image */
-    margin: 0 30px; /* supprime la marge gauche et ajoute une marge droite */
+    width: 200px;
+    margin: 0 30px;
     z-index: 0;
 }
 
 .image {
+    height: 200px;
     width: 100%;
 }
 
@@ -85,6 +95,17 @@ h1 {
     z-index: -1;
 
 }
+
+.previous {
+    margin-right: 100px;
+    color: #fff;
+}
+
+.next {
+    margin-left: 100px;
+    color: #fff;
+}
+
 /* Section stattistiques du Pokemon*/
 .statistique {
     flex: 1;

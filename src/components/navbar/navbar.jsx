@@ -1,18 +1,16 @@
 import React from "react";
 import logo from "../../assets/images/logo/logo_pokeAPI.svg";
+import { SearchBar } from "../searchBar/searchBar";
 import style from './style.module.scss';
 
-function NavigationBar () {
+function NavigationBar ({onSubmit}) {
   return (
     <nav className={style.navbar}>
       <div className={style.navbar__logo}>
         <img src={logo} alt="Logo" />
       </div>
       <div className={style.navbar__search}>
-        <form>
-          <input type="text" placeholder="Taper le nom du Pokemon" />
-          <button type="submit">Rechercher</button>
-        </form>
+        <SearchBar onSubmit={onSubmit}/>
       </div>
     </nav>
   );

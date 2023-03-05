@@ -8,10 +8,10 @@ export class pokemonAPI {
     };
 
     static async fetchPokemonName(pokemonID) {
-        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
-        return response.data.species.name;
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon-species/${pokemonID}`);
+        return response.data.name;
     };
-
+    
     static async fetchPokemonWeight(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
         return response.data.weight;
