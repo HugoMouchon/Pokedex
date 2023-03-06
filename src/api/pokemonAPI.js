@@ -41,6 +41,13 @@ export class pokemonAPI {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
         return response.data.stats;
     };
+
+    static async fetchPokemonFlavorText (pokemonID) {
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon-species/${pokemonID}`);
+        return response.data.flavor_text_entries.find(
+            (entry) => entry.language.name === "fr"
+          );
+    };
 }
 
 

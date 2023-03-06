@@ -5,12 +5,14 @@ import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
 import BadgePokemon from './components/badge/badgePokemon';
-import { Button } from '@mui/material';
+import { Button, Icon } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ArrowBackIosNewRounded, ArrowRightAltRounded, ArrowRightAltSharp, ArrowRightRounded, KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowRight, Send } from '@mui/icons-material';
+import { FlavorText } from './components/flavorText/flavorText';
+import PokemonList from './components/pokemonList/pokemonList';
+import iconeDesc from './assets/images/icones/mobile.png';
 
 export function App() {
-
-  let test = 1;
 
   const [imagePokemon, setImagePokemon] = useState();
   const [namePokemon, setNamePokemon] = useState();
@@ -20,8 +22,25 @@ export function App() {
   const [typesPokemon, setTypesPokemon] = useState([]);
   const [orderPokemon, setOrderPokemon] = useState();
   const [statsPokemon, setStatsPokemon] = useState([]);
+  const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);
 
   const [nextPokemon, setNextPokemon] = useState(1);
+
+  const theme = createTheme({
+    status: {
+      danger: '#e53e3e',
+    },
+    palette: {
+      primary: {
+        main: '#f6c81f',
+        seconder: '#f6c81f',
+      },
+      secondary: {
+        main: '#f6c81f',
+        contrastText: '#fff',
+      },
+    },
+  });
 
   const nextClick = () => {
     setNextPokemon(nextPokemon + 1);
@@ -114,6 +133,17 @@ export function App() {
     fetchPokemonStats(nextPokemon);
   }, [nextPokemon])
 
+  // Fonction permettant de récupérer la text d'ambiance (phrase d'accroche) du Pokemon.
+  async function fetchPokemonFlavorText(pokemonID) {
+    const text = await pokemonAPI.fetchPokemonFlavorText(pokemonID);
+    setFlavorTextPokemon(text);
+  }
+
+  useEffect(() => {
+    fetchPokemonFlavorText(nextPokemon);
+    console.log(flavorTextPokemon);
+  }, [nextPokemon])
+
   // Fonction permettant d'ajouter un hashtag et un ou des zéros devant l'ordre du pokemon
   function addZeros(orderPokemon) {
     if (orderPokemon < 10) {
@@ -146,14 +176,18 @@ export function App() {
 
       <div className={style.container_PreviousNext}>
 
-      <div className={style.previous}>
-          <Button
-            onClick={previousClick}
-            variant="contained"
-            startIcon={<KeyboardArrowLeft />}
-          >
-            Suivant {orderPokemon - 1}
-          </Button>
+        <div className={style.previous}>
+          <ThemeProvider theme={theme}>
+            <Button
+              onClick={previousClick}
+              variant="contained"
+              startIcon={<KeyboardArrowLeft />}
+              color="primary"
+              style={{ color: "white" }}
+            >
+              {orderPokemon - 1} Précedent
+            </Button>
+          </ThemeProvider>
         </div>
 
         <div className={style.container_details}>
@@ -162,6 +196,7 @@ export function App() {
               {typesPokemon && typesPokemon.map((type) => (
                 <div key={type.slot}>
                   <BadgePokemon types={typesPokemon} />
+
                 </div>
               ))}
             </div>
@@ -193,21 +228,40 @@ export function App() {
         </div>
 
         <div className={style.next}>
-          <Button
-            onClick={nextClick}
-            variant="contained"
-            endIcon={<KeyboardArrowRight />}
-          >
-            Suivant {orderPokemon +1}
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              onClick={nextClick}
+              variant="contained"
+              endIcon={<KeyboardArrowRight />}
+              color="primary"
+              style={{ color: "white" }}
+            >
+              Suivant {orderPokemon + 1}
+            </Button>
+          </ThemeProvider>
         </div>
 
       </div>
-      <div className={style.statistique}>
-        <PokemonStats
-          stats={statsPokemon}
-        />
+      <div className={style.container_stats}>
+        <div className={style.container_flavorText}>
+          <div className={style.iconeTitle}>
+            <img className={style.icone} src={iconeDesc} />
+            <h2>Description</h2>
+          </div>
+          <FlavorText text={flavorTextPokemon} />
+
+        </div>
+        <div className={style.statistique}>
+          <PokemonStats
+            stats={statsPokemon}
+          />
+        </div>
+
+        <div className={style.container_flavorText}>
+          <h2>Evolutions</h2>
+        </div>
       </div>
+      <PokemonList />
     </div>
   );
 }

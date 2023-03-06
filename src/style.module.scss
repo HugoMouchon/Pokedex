@@ -30,11 +30,7 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-}
-
-.container_nomination {
-    display: flex;
-    flex-direction: column;
+    
 }
 
 .container_nomination1 {
@@ -98,15 +94,42 @@ h1 {
 
 .previous {
     margin-right: 100px;
-    color: #fff;
 }
 
 .next {
     margin-left: 100px;
-    color: #fff;
+}
+// flavorText
+
+.container_flavorText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    text-align: center;
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        color: c.$text-color;
+        margin: 0;
+    }
 }
 
+
 /* Section stattistiques du Pokemon*/
+.icone {
+    height: 50px;
+    padding-right: 10px;
+}
+
+.container_stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .statistique {
     flex: 1;
+    margin-top: 50px;
 }
