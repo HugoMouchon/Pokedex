@@ -13,6 +13,7 @@
     height: 100vh;
     background: linear-gradient(180deg, rgb(126, 215, 155) 20%, rgb(27, 135, 64) 100%);
 
+
     span {
         text-transform: capitalize;
     }
@@ -30,7 +31,6 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    
 }
 
 .container_nomination1 {
@@ -39,6 +39,7 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: c.$text-color;
+    width: 330px;
 
     p {
         margin: 0;
@@ -83,10 +84,10 @@ h1 {
 
 .number {
     position: absolute;
-    top: 0;
+    top: -80px;
     right: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 200px;
+    font-size: 250px;
     color: #ffffff47;
     z-index: -1;
 

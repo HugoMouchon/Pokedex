@@ -11,10 +11,12 @@ import { ArrowBackIosNewRounded, ArrowRightAltRounded, ArrowRightAltSharp, Arrow
 import { FlavorText } from './components/flavorText/flavorText';
 import PokemonList from './components/pokemonList/pokemonList';
 import iconeDesc from './assets/images/icones/mobile.png';
+import { ItemPokemon } from './components/itemPokemon/itemPokemon';
 
 export function App() {
 
   const [imagePokemon, setImagePokemon] = useState();
+  const [gifsPokemon, setGifsPokemon] = useState([]);
   const [namePokemon, setNamePokemon] = useState();
   const [weightPokemon, setWeightPokemon] = useState();
   const [heightPokemon, setHeightPokemon] = useState();
@@ -61,11 +63,21 @@ export function App() {
     fetchPokemonImage(nextPokemon);
   }, [nextPokemon]);
 
+  // Fonction permettant de récupérer le gif du Pokemon
+  async function fetchPokemonGifs(pokemonID) {
+    const imageURL = await pokemonAPI.fetchPokemonGifs(pokemonID);
+    setGifsPokemon(imageURL);
+  }
+
+  useEffect(() => {
+    fetchPokemonGifs(nextPokemon);
+  }, [nextPokemon]);
+
   // Fonction permettant de récupérer le nom du Pokemon
   async function fetchPokemonName(pokemonID) {
-    const name = await pokemonAPI.fetchPokemonName(pokemonID);
-    if (name.length > 0) {
-      setNamePokemon(name);
+    const names = await pokemonAPI.fetchPokemonName(pokemonID);
+    if (names.length > 0) {
+      setNamePokemon(names[0].name);
     }
   }
 
@@ -141,7 +153,6 @@ export function App() {
 
   useEffect(() => {
     fetchPokemonFlavorText(nextPokemon);
-    console.log(flavorTextPokemon);
   }, [nextPokemon])
 
   // Fonction permettant d'ajouter un hashtag et un ou des zéros devant l'ordre du pokemon
@@ -169,7 +180,8 @@ export function App() {
   }
 
   return (
-    <div className={style.container}>
+    <div className={style.container}
+    >
       <div className={style.header}>
         <NavBar onSubmit={fetchPokemonName} />
       </div>
@@ -257,7 +269,10 @@ export function App() {
           />
         </div>
 
-        <div className={style.container_flavorText}>
+        <div className={style.container_evolution}>
+          <div>
+            <ItemPokemon gif={gifsPokemon} name={namePokemon}/>
+          </div>
           <h2>Evolutions</h2>
         </div>
       </div>

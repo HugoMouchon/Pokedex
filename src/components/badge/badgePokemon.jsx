@@ -59,7 +59,6 @@ export const colorsTable = [
 ];
 
 export default function BadgePokemon({ types }) {
-
     return (
         <div className={style.container}>
             {types.map((type) => {

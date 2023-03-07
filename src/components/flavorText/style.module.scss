@@ -1,5 +1,9 @@
 @use "../../sass/colors" as c;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Press+Start+2P&display=swap');
 
 .text {
     color: c.$text-color;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
 }

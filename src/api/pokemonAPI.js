@@ -7,9 +7,15 @@ export class pokemonAPI {
         return response.data.sprites.other.dream_world.front_default;
     };
 
+    static async fetchPokemonGifs(pokemonID) {
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
+        return response.data.sprites.versions['generation-v']['black-white'].animated;
+    };
+
     static async fetchPokemonName(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon-species/${pokemonID}`);
-        return response.data.name;
+        return response.data.names.filter((name) => name.language.name === "fr");
+        
     };
     
     static async fetchPokemonWeight(pokemonID) {
