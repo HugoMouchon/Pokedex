@@ -26,7 +26,8 @@ export function App() {
   const [statsPokemon, setStatsPokemon] = useState([]);
   const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);
 
-  const [nextPokemon, setNextPokemon] = useState(1);
+  const [idPokemon, setIdPokemon] = useState([]);
+  const [numberPokemon, setNumberPokemon] = useState(1);
 
   const theme = createTheme({
     status: {
@@ -45,12 +46,30 @@ export function App() {
   });
 
   const nextClick = () => {
-    setNextPokemon(nextPokemon + 1);
+    setNumberPokemon(numberPokemon + 1);
   }
 
   const previousClick = () => {
-    setNextPokemon(nextPokemon - 1);
+    if (numberPokemon === 1) {
+      return numberPokemon;
+    }
+    setNumberPokemon(numberPokemon - 1);
   }
+
+  const handleClick = () => {
+    setNumberPokemon(idPokemon)
+    console.log("coucou");;
+  }
+
+  // Fonction permettant de récupérer l'id du pokemon
+  async function fetchPokemonId(pokemonID) {
+    const id = await pokemonAPI.fetchPokemonId(pokemonID);
+    setIdPokemon(id);
+  }
+
+  useEffect(() => {
+    fetchPokemonId(numberPokemon + 1);
+  }, [numberPokemon]);
 
 
   // Fonction permettant de récupérer l'image du Pokemon
@@ -60,18 +79,18 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonImage(nextPokemon);
-  }, [nextPokemon]);
+    fetchPokemonImage(numberPokemon);
+  }, [numberPokemon]);
 
   // Fonction permettant de récupérer le gif du Pokemon
   async function fetchPokemonGifs(pokemonID) {
-    const imageURL = await pokemonAPI.fetchPokemonGifs(pokemonID);
-    setGifsPokemon(imageURL);
+    const gifURL = await pokemonAPI.fetchPokemonGifs(pokemonID);
+    setGifsPokemon(gifURL);
   }
 
   useEffect(() => {
-    fetchPokemonGifs(nextPokemon);
-  }, [nextPokemon]);
+    fetchPokemonGifs(numberPokemon);
+  }, [numberPokemon]);
 
   // Fonction permettant de récupérer le nom du Pokemon
   async function fetchPokemonName(pokemonID) {
@@ -82,8 +101,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonName(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonName(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer le poid du Pokemon
   async function fetchPokemonWeight(pokemonID) {
@@ -92,8 +111,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonWeight(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonWeight(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer la hauteur du Pokemon
   async function fetchPokemonHeight(pokemonID) {
@@ -102,8 +121,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonHeight(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonHeight(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer les abilitées du Pokemon et qui en affiche 1 maximum
   async function fetchPokemonAbilities(pokemonID) {
@@ -112,8 +131,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonAbilities(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonAbilities(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer le ou les types du Pokemon
   async function fetchPokemonTypes(pokemonID) {
@@ -122,8 +141,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonTypes(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonTypes(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer le numéro d'ordre du Pokemon
   async function fetchPokemonOrder(pokemonID) {
@@ -132,8 +151,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonOrder(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonOrder(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer les stats du Pokemon
   async function fetchPokemonStats(pokemonID) {
@@ -142,8 +161,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonStats(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonStats(numberPokemon);
+  }, [numberPokemon])
 
   // Fonction permettant de récupérer la text d'ambiance (phrase d'accroche) du Pokemon.
   async function fetchPokemonFlavorText(pokemonID) {
@@ -152,10 +171,10 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonFlavorText(nextPokemon);
-  }, [nextPokemon])
+    fetchPokemonFlavorText(numberPokemon);
+  }, [numberPokemon])
 
-  // Fonction permettant d'ajouter un hashtag et un ou des zéros devant l'ordre du pokemon
+  // Fonction permettant d'ajouter un hashtag et un ou des zéros devant le numéro du pokemon
   function addZeros(orderPokemon) {
     if (orderPokemon < 10) {
       return "#00" + orderPokemon;
@@ -271,12 +290,12 @@ export function App() {
 
         <div className={style.container_evolution}>
           <div>
-            <ItemPokemon gif={gifsPokemon} name={namePokemon}/>
+              <ItemPokemon gif={gifsPokemon} name={namePokemon} onClick={handleClick} id={idPokemon} />
           </div>
           <h2>Evolutions</h2>
         </div>
       </div>
-      <PokemonList />
+      <PokemonList gif={gifsPokemon}/>
     </div>
   );
 }
