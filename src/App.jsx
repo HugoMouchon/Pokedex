@@ -5,13 +5,13 @@ import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
 import BadgePokemon from './components/badge/badgePokemon';
-import { Button, Icon } from '@mui/material';
+import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ArrowBackIosNewRounded, ArrowRightAltRounded, ArrowRightAltSharp, ArrowRightRounded, KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowRight, Send } from '@mui/icons-material';
-import { FlavorText } from './components/flavorText/flavorText';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PokemonList from './components/pokemonList/pokemonList';
 import iconeDesc from './assets/images/icones/mobile.png';
-import { ItemPokemon } from './components/itemPokemon/itemPokemon';
+import locale from 'antd/es/date-picker/locale/en_US';
+import NotificationPokemon from './components/notificationPokemon/notificationPokemon';
 
 export function App() {
 
@@ -255,6 +255,7 @@ export function App() {
           <div className={style.container_image}>
             <img className={style.image} src={imagePokemon} alt="" />
             <span className={style.number}>{addZeros(orderPokemon)}</span>
+            <NotificationPokemon name={namePokemon} text={flavorTextPokemon}/>
           </div>
         </div>
 
@@ -274,28 +275,13 @@ export function App() {
 
       </div>
       <div className={style.container_stats}>
-        <div className={style.container_flavorText}>
-          <div className={style.iconeTitle}>
-            <img className={style.icone} src={iconeDesc} />
-            <h2>Description</h2>
-          </div>
-          <FlavorText text={flavorTextPokemon} />
-
-        </div>
         <div className={style.statistique}>
           <PokemonStats
             stats={statsPokemon}
           />
         </div>
-
-        <div className={style.container_evolution}>
-          <div>
-              <ItemPokemon gif={gifsPokemon} name={namePokemon} onClick={handleClick} id={idPokemon} />
-          </div>
-          <h2>Evolutions</h2>
-        </div>
       </div>
-      <PokemonList gif={gifsPokemon}/>
+      <PokemonList gif={gifsPokemon} name={namePokemon} onclick={handleClick} idList={idPokemon} />
     </div>
   );
 }
