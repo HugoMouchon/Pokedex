@@ -1,11 +1,10 @@
 import { Button, Drawer, Space } from 'antd';
 import { useState } from 'react';
 import { ItemPokemon } from '../itemPokemon/itemPokemon';
-import pokeball from '../../assets/images/icones/animated_pokeball.gif';
 import style from './style.module.scss';
 import IconePokedexHaut from '../topArrowPokedex/iconePokedexHaut';
 
-export function PokemonList({ pokemonList, onclick }) {
+export function PokemonList({ pokemonList, onclick, backgroundColor }) {
 
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState('bottom');
@@ -16,7 +15,6 @@ export function PokemonList({ pokemonList, onclick }) {
   const onClose = () => {
     setOpen(false);
   };
-
 
   return (
     <>
@@ -36,7 +34,7 @@ export function PokemonList({ pokemonList, onclick }) {
         onClose={onClose}
         open={open}
         key={placement}
-        style={{ textAlign: "center", backgroundColor: "#7ed79b", color: "#fff" }}
+        style={{ textAlign: "center", background: `${backgroundColor}`, color: "#fff" }}
       >
         <div className={style.container_list}>
           {pokemonList.map((pokemon) => (

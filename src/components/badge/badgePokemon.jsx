@@ -39,7 +39,7 @@ export const colorsTable = [
         name: "grass", color: "#74CB48",
     },
     {
-        name: "eletric", color: "#F9CF30",
+        name: "electric", color: "#f9cf30",
     },
     {
         name: "psychic", color: "#FB5584",

@@ -1,5 +1,6 @@
 @use "./sass/_colors" as c;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Poppins:wght@300&display=swap');
 
 .container_PreviousNext {
     display: flex;
@@ -11,7 +12,7 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background: linear-gradient(180deg, rgb(126, 215, 155) 20%, #1b8740 100%);
+
 
 
     span {
@@ -36,13 +37,13 @@
 .container_nomination1 {
     display: flex;
     justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
     color: c.$text-color;
     width: 330px;
 
     p {
         margin: 0;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
     }
 }
 

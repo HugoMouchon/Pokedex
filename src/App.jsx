@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PokemonList from './components/pokemonList/pokemonList';
 import NotificationPokemon from './components/notificationPokemon/notificationPokemon';
+import { backgroundColorsTable } from './components/backgroundColorsTable/backgroundColorsTable';
 
 export function App() {
 
@@ -20,6 +21,8 @@ export function App() {
   const [heightPokemon, setHeightPokemon] = useState();
   const [abilitiesPokemon, setAbilitiesPokemon] = useState([]);
   const [typesPokemon, setTypesPokemon] = useState([]);
+  const [changeBackgroundColor, setChangeBackgroundColor] = useState([]);
+  const [changeBackgroundColorDrawer, setChangeBackgroundColorDrawer] = useState([]);
   const [orderPokemon, setOrderPokemon] = useState();
   const [statsPokemon, setStatsPokemon] = useState([]);
   const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);
@@ -29,18 +32,33 @@ export function App() {
 
   const [listePokemon, setListPokemon] = useState([]);
 
+  useEffect(() => {
+    const backgroundColors = typesPokemon.map((type) => {
+      const typeObject = backgroundColorsTable.find((obj) => obj.name === type.type.name);
+      return typeObject ? typeObject.color : "grey";
+    });
+    setChangeBackgroundColor(backgroundColors);
+  }, [typesPokemon]);
+
+  useEffect(() => {
+    const backgroundColorsDrawer = typesPokemon.map((type) => {
+      const typeObject2 = backgroundColorsTable.find((obj) => obj.name === type.type.name);
+      return typeObject2 ? typeObject2.bgDrawer : "grey";
+    });
+    setChangeBackgroundColorDrawer(backgroundColorsDrawer);
+  }, [typesPokemon]);
+
+
   const theme = createTheme({
     status: {
       danger: '#e53e3e',
     },
     palette: {
       primary: {
-        main: '#f6c81f',
-        seconder: '#f6c81f',
+        main: '#fff',
       },
       secondary: {
-        main: '#f6c81f',
-        contrastText: '#fff',
+        main: '#fff',
       },
     },
   });
@@ -49,12 +67,42 @@ export function App() {
     setNumberPokemon(numberPokemon + 1);
   }
 
+  // UseEffect permettant de placer un écouteur d'evenements sur le bouton "fleche de droite" et lord de l'appui de celui ci, ça affiche le pokemon suivant grace à la fonction nextClick().
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 39) {
+        nextClick();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [numberPokemon]);
+
   const previousClick = () => {
     if (numberPokemon === 1) {
       return numberPokemon;
     }
     setNumberPokemon(numberPokemon - 1);
   }
+
+  // UseEffect permettant de placer un écouteur d'evenements sur le bouton "fleche de gauche" et lord de l'appui de celui ci, ça affiche le pokemon précedent grace à la fonction previousClick().
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 37) {
+        previousClick();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [numberPokemon]);
 
   const handleClick = (listePokemon) => {
     setNumberPokemon(listePokemon.number);
@@ -78,7 +126,7 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonId( );
+    fetchPokemonId();
   }, []);
 
 
@@ -212,6 +260,7 @@ export function App() {
 
   return (
     <div className={style.container}
+    style={{background: `${changeBackgroundColor}`}}
     >
       <div className={style.header}>
         <NavBar onSubmit={fetchPokemonName} />
@@ -226,7 +275,7 @@ export function App() {
               variant="contained"
               startIcon={<KeyboardArrowLeft />}
               color="primary"
-              style={{ color: "white" }}
+              style={{ color: "#3c5aa6" }}
             >
               {orderPokemon - 1} Précedent
             </Button>
@@ -278,7 +327,7 @@ export function App() {
               variant="contained"
               endIcon={<KeyboardArrowRight />}
               color="primary"
-              style={{ color: "white" }}
+              style={{ color: "#3c5aa6" }}
             >
               Suivant {orderPokemon + 1}
             </Button>
@@ -293,7 +342,7 @@ export function App() {
           />
         </div>
       </div>
-      <PokemonList pokemonList={listePokemon} onclick={handleClick} />
+      <PokemonList pokemonList={listePokemon} onclick={handleClick} backgroundColor={changeBackgroundColorDrawer} />
     </div>
   );
 }
