@@ -9,8 +9,6 @@ import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PokemonList from './components/pokemonList/pokemonList';
-import iconeDesc from './assets/images/icones/mobile.png';
-import locale from 'antd/es/date-picker/locale/en_US';
 import NotificationPokemon from './components/notificationPokemon/notificationPokemon';
 
 export function App() {
@@ -28,6 +26,8 @@ export function App() {
 
   const [idPokemon, setIdPokemon] = useState([]);
   const [numberPokemon, setNumberPokemon] = useState(1);
+
+  const [listePokemon, setListPokemon] = useState([]);
 
   const theme = createTheme({
     status: {
@@ -56,10 +56,20 @@ export function App() {
     setNumberPokemon(numberPokemon - 1);
   }
 
-  const handleClick = () => {
-    setNumberPokemon(idPokemon)
-    console.log("coucou");;
+  const handleClick = (listePokemon) => {
+    setNumberPokemon(listePokemon.number);
+  };
+
+  // Fonction permettant de récupérer une liste de Pokemon
+  async function fetchPokemonList() {
+    const listPokemons = await pokemonAPI.fetchPokemonList();
+    setListPokemon(listPokemons)
   }
+
+  useEffect(() => {
+    fetchPokemonList();
+  }, []);
+
 
   // Fonction permettant de récupérer l'id du pokemon
   async function fetchPokemonId(pokemonID) {
@@ -68,8 +78,8 @@ export function App() {
   }
 
   useEffect(() => {
-    fetchPokemonId(numberPokemon + 1);
-  }, [numberPokemon]);
+    fetchPokemonId( );
+  }, []);
 
 
   // Fonction permettant de récupérer l'image du Pokemon
@@ -97,6 +107,8 @@ export function App() {
     const names = await pokemonAPI.fetchPokemonName(pokemonID);
     if (names.length > 0) {
       setNamePokemon(names[0].name);
+    } else {
+      setNamePokemon("Pokemon Inconnu");
     }
   }
 
@@ -255,7 +267,7 @@ export function App() {
           <div className={style.container_image}>
             <img className={style.image} src={imagePokemon} alt="" />
             <span className={style.number}>{addZeros(orderPokemon)}</span>
-            <NotificationPokemon name={namePokemon} text={flavorTextPokemon}/>
+            <NotificationPokemon name={namePokemon} text={flavorTextPokemon} />
           </div>
         </div>
 
@@ -281,7 +293,7 @@ export function App() {
           />
         </div>
       </div>
-      <PokemonList gif={gifsPokemon} name={namePokemon} onclick={handleClick} idList={idPokemon} />
+      <PokemonList pokemonList={listePokemon} onclick={handleClick} />
     </div>
   );
 }

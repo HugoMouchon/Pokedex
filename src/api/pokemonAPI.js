@@ -21,9 +21,9 @@ export class pokemonAPI {
     static async fetchPokemonName(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon-species/${pokemonID}`);
         return response.data.names.filter((name) => name.language.name === "fr");
-        
+
     };
-    
+
     static async fetchPokemonWeight(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
         return response.data.weight;
@@ -54,12 +54,27 @@ export class pokemonAPI {
         return response.data.stats;
     };
 
-    static async fetchPokemonFlavorText (pokemonID) {
+    static async fetchPokemonFlavorText(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon-species/${pokemonID}`);
         return response.data.flavor_text_entries.find(
             (entry) => entry.language.name === "fr"
-          );
+        );
     };
+
+    static async fetchPokemonList() {
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/?offset=1&limit=25`);
+        const pokemonList = response.data.results;
+        const pokemonDataList = await Promise.all(pokemonList.map(async (pokemon) => {
+            const response = await axios.get(pokemon.url);
+            const pokemonData = {
+                name: pokemon.name,
+                number: response.data.id,
+                imageUrl: response.data.sprites.other.dream_world.front_default
+            };
+            return pokemonData;
+        }));
+        return pokemonDataList;
+    }
 }
 
 

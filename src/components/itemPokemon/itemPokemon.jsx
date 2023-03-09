@@ -1,14 +1,15 @@
 import style from './style.module.scss';
 
-export function ItemPokemon({ gif, name, onClick, id }) {
+export function ItemPokemon({ img, onClick, nom, id }) {
     return (
         <div
             key={id}
             className={style.container}
             onClick={onClick}
         >
-            <img src={gif.front_default} alt="" />
-            <h4>{name}</h4>
+            <img src={img} alt="" />
+            <h4>{nom}</h4>
+            <span>{id}</span>
         </div>
     );
 }

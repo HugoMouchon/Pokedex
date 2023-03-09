@@ -1,0 +1,27 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.title {
+  font-size: 15px;
+}
+
+.iconeFleche {
+    animation: aller-retour 2s infinite;
+  }
+  
+  @keyframes aller-retour {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
