@@ -3,19 +3,9 @@ import { BASE_URL_POKEAPI } from '../config';
 
 export class pokemonAPI {
 
-    static async fetchPokemonId(pokemonID) {
-        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
-        return response.data.id;
-    };
-
     static async fetchPokemonImage(pokemonID) {
         const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
         return response.data.sprites.other.dream_world.front_default;
-    };
-
-    static async fetchPokemonGifs(pokemonID) {
-        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/${pokemonID}`);
-        return response.data.sprites.versions['generation-v']['black-white'].animated;
     };
 
     static async fetchPokemonName(pokemonID) {
@@ -62,14 +52,14 @@ export class pokemonAPI {
     };
 
     static async fetchPokemonList() {
-        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/?offset=1&limit=300`);
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/?offset=1&limit=50`);
         const pokemonList = response.data.results;
         const pokemonDataList = await Promise.all(pokemonList.map(async (pokemon) => {
             const response = await axios.get(pokemon.url);
             const pokemonData = {
                 name: pokemon.name,
                 number: response.data.id,
-                imageUrl: response.data.sprites.other.dream_world.front_default
+                imageUrl: response.data.sprites.other.dream_world.front_default,
             };
             return pokemonData;
         }));

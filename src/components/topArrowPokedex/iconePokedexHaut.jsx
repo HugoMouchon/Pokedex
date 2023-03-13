@@ -5,7 +5,7 @@ export default function IconePokedexHaut() {
   return (
     <div className={style.container}>
       <img className={style.iconeFleche} src={arrow} alt="" width={"60px"} />
-      <span className={style.title} >LISTE DES POKEMONS</span>
+      <span className={style.title} >Voir Pokedex</span>
     </div>
   );
 };

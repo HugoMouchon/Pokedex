@@ -15,7 +15,6 @@ import { backgroundColorsTable } from './components/backgroundColorsTable/backgr
 export function App() {
 
   const [imagePokemon, setImagePokemon] = useState();
-  const [gifsPokemon, setGifsPokemon] = useState([]);
   const [namePokemon, setNamePokemon] = useState();
   const [weightPokemon, setWeightPokemon] = useState();
   const [heightPokemon, setHeightPokemon] = useState();
@@ -26,10 +25,9 @@ export function App() {
   const [orderPokemon, setOrderPokemon] = useState();
   const [statsPokemon, setStatsPokemon] = useState([]);
   const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
-  const [idPokemon, setIdPokemon] = useState([]);
   const [numberPokemon, setNumberPokemon] = useState(1);
-
   const [listePokemon, setListPokemon] = useState([]);
 
   useEffect(() => {
@@ -104,9 +102,13 @@ export function App() {
     };
   }, [numberPokemon]);
 
-  const handleClick = (listePokemon) => {
-    setNumberPokemon(listePokemon.number);
+  const handlePokemonClick = (pokemonId) => {
+    setNumberPokemon(pokemonId);
   };
+
+  function handleSearch(value) {
+    setSearchValue(value);
+  }
 
   // Fonction permettant de récupérer une liste de Pokemon
   async function fetchPokemonList() {
@@ -118,18 +120,6 @@ export function App() {
     fetchPokemonList();
   }, []);
 
-
-  // Fonction permettant de récupérer l'id du pokemon
-  async function fetchPokemonId(pokemonID) {
-    const id = await pokemonAPI.fetchPokemonId(pokemonID);
-    setIdPokemon(id);
-  }
-
-  useEffect(() => {
-    fetchPokemonId();
-  }, []);
-
-
   // Fonction permettant de récupérer l'image du Pokemon
   async function fetchPokemonImage(pokemonID) {
     const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
@@ -138,16 +128,6 @@ export function App() {
 
   useEffect(() => {
     fetchPokemonImage(numberPokemon);
-  }, [numberPokemon]);
-
-  // Fonction permettant de récupérer le gif du Pokemon
-  async function fetchPokemonGifs(pokemonID) {
-    const gifURL = await pokemonAPI.fetchPokemonGifs(pokemonID);
-    setGifsPokemon(gifURL);
-  }
-
-  useEffect(() => {
-    fetchPokemonGifs(numberPokemon);
   }, [numberPokemon]);
 
   // Fonction permettant de récupérer le nom du Pokemon
@@ -260,7 +240,7 @@ export function App() {
 
   return (
     <div className={style.container}
-    style={{background: `${changeBackgroundColor}`}}
+      style={{ background: `${changeBackgroundColor}` }}
     >
       <div className={style.header}>
         <NavBar onSubmit={fetchPokemonName} />
@@ -288,7 +268,6 @@ export function App() {
               {typesPokemon && typesPokemon.map((type) => (
                 <div key={type.slot}>
                   <BadgePokemon types={typesPokemon} />
-
                 </div>
               ))}
             </div>
@@ -342,9 +321,9 @@ export function App() {
           />
         </div>
       </div>
-      <PokemonList pokemonList={listePokemon} onclick={handleClick} backgroundColor={changeBackgroundColorDrawer} />
+      <PokemonList pokemonList={listePokemon} searchValue={searchValue} onPokemonClick={handlePokemonClick} backgroundColor={changeBackgroundColorDrawer} />
     </div>
-  );
+  );    
 }
 
 export default App
