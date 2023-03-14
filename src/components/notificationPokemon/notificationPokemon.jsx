@@ -1,5 +1,4 @@
 import { Button, notification } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import style from './style.module.scss';
 import icone from '../../assets/images/icones/pokeball.png';
 
@@ -8,6 +7,7 @@ export function NotificationPokemon({ text, name }) {
     const [api, contextHolder] = notification.useNotification();
 
     const openNotification = () => {
+        const placement = window.innerWidth <= 576 ? 'bottom' : 'bottomRight';
         api.open({
             message: `Information sur ${name}`,
             description:
@@ -16,7 +16,7 @@ export function NotificationPokemon({ text, name }) {
                 <img className={style.icone} src={icone} alt="pokeball" />
             ),
             style: { backgroundColor: "#fff", color: "black" },
-            placement: 'bottomRight',
+            placement: placement,
 });
     };
 return (
@@ -28,6 +28,7 @@ return (
             shape="circle"
             onClick={openNotification}
             style={{ backgroundColor: '#fff', color: '#1b8740' }}
+            className={style.notificationButton}
         >
             ?
         </Button>
