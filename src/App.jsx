@@ -1,16 +1,16 @@
 import style from './style.module.scss';
-import './global.scss';
+import '../src/sass/global.scss';
 import React, { useEffect, useState } from 'react';
 import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
 import BadgePokemon from './components/badge/badgePokemon';
-import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
+import { Button } from 'antd';
+import { KeyboardArrowLeft } from '@mui/icons-material';
 import PokemonList from './components/pokemonList/pokemonList';
 import NotificationPokemon from './components/notificationPokemon/notificationPokemon';
 import { backgroundColorsTable } from './components/backgroundColorsTable/backgroundColorsTable';
+import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 
 export function App() {
 
@@ -24,8 +24,7 @@ export function App() {
   const [changeBackgroundColorDrawer, setChangeBackgroundColorDrawer] = useState([]);
   const [orderPokemon, setOrderPokemon] = useState();
   const [statsPokemon, setStatsPokemon] = useState([]);
-  const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [flavorTextPokemon, setFlavorTextPokemon] = useState([]);;
 
   const [numberPokemon, setNumberPokemon] = useState(1);
   const [listePokemon, setListPokemon] = useState([]);
@@ -45,21 +44,6 @@ export function App() {
     });
     setChangeBackgroundColorDrawer(backgroundColorsDrawer);
   }, [typesPokemon]);
-
-
-  const theme = createTheme({
-    status: {
-      danger: '#e53e3e',
-    },
-    palette: {
-      primary: {
-        main: '#fff',
-      },
-      secondary: {
-        main: '#fff',
-      },
-    },
-  });
 
   const nextClick = () => {
     setNumberPokemon(numberPokemon + 1);
@@ -105,10 +89,6 @@ export function App() {
   const handlePokemonClick = (pokemonId) => {
     setNumberPokemon(pokemonId);
   };
-
-  function handleSearch(value) {
-    setSearchValue(value);
-  }
 
   // Fonction permettant de récupérer une liste de Pokemon
   async function fetchPokemonList() {
@@ -249,17 +229,15 @@ export function App() {
       <div className={style.container_PreviousNext}>
 
         <div className={style.previous}>
-          <ThemeProvider theme={theme}>
             <Button
               onClick={previousClick}
               variant="contained"
-              startIcon={<KeyboardArrowLeft />}
+              icon={<CaretLeftOutlined />}
               color="primary"
-              style={{ color: "#3c5aa6" }}
+              className={style.btnPrevious}
             >
               {orderPokemon - 1} Précedent
             </Button>
-          </ThemeProvider>
         </div>
 
         <div className={style.container_details}>
@@ -300,17 +278,15 @@ export function App() {
         </div>
 
         <div className={style.next}>
-          <ThemeProvider theme={theme}>
             <Button
               onClick={nextClick}
               variant="contained"
-              endIcon={<KeyboardArrowRight />}
+              icon={<CaretRightOutlined />}
+              className={style.btnNext}
               color="primary"
-              style={{ color: "#3c5aa6" }}
             >
               Suivant {orderPokemon + 1}
             </Button>
-          </ThemeProvider>
         </div>
 
       </div>
@@ -321,7 +297,7 @@ export function App() {
           />
         </div>
       </div>
-      <PokemonList pokemonList={listePokemon} searchValue={searchValue} onPokemonClick={handlePokemonClick} backgroundColor={changeBackgroundColorDrawer} />
+      <PokemonList pokemonList={listePokemon} onPokemonClick={handlePokemonClick} backgroundColor={changeBackgroundColorDrawer} />
     </div>
   );    
 }

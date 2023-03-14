@@ -11,7 +11,7 @@ export function NotificationPokemon({ text, name }) {
         api.open({
             message: `Information sur ${name}`,
             description:
-                `" ${text.flavor_text} "`,
+               `" ${text.flavor_text} "`,
             icon: (
                 <img className={style.icone} src={icone} alt="pokeball" />
             ),

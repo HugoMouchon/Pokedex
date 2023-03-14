@@ -12,7 +12,8 @@
 
 .item {
     margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out,
+    transition: transform 0.3s ease-in-out;
+    width: calc(100% / 7);
 }
 
 .item:hover {
@@ -58,4 +59,12 @@ li {
 /* Apparence de la barre de défilement de fond */
 ::-webkit-scrollbar-track {
     background-color: transparent;
+}
+
+@media (max-width: 576px) {
+    .item {
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out;
+        width: calc(100% / 4);
+    }
 }

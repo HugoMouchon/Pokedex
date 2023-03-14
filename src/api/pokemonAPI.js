@@ -52,7 +52,7 @@ export class pokemonAPI {
     };
 
     static async fetchPokemonList() {
-        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/?offset=1&limit=50`);
+        const response = await axios.get(`${BASE_URL_POKEAPI}pokemon/?offset=1&limit=300`);
         const pokemonList = response.data.results;
         const pokemonDataList = await Promise.all(pokemonList.map(async (pokemon) => {
             const response = await axios.get(pokemon.url);

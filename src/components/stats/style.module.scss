@@ -1,8 +1,4 @@
 @use "../../sass/colors" as c;
-@font-face {
-    font-family: 'fontPokemon';
-    src: url('../../fonts/PokemonSolid.ttf') format('truetype');
-  }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 .container {
@@ -52,9 +48,14 @@
         font-family: 'Poppins', sans-serif;
 
         span {
-            font-family: fontPokemon;
             text-transform: uppercase;
             color: #fff;
         }
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        width: 100vw;
     }
 }

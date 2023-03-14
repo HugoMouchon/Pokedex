@@ -1,9 +1,8 @@
-import { Drawer, Space } from 'antd';
+import { Drawer, Input, Space } from 'antd';
 import { useState } from 'react';
 import { ItemPokemon } from '../itemPokemon/itemPokemon';
 import style from './style.module.scss';
 import IconePokedexHaut from '../topArrowPokedex/iconePokedexHaut';
-import Search from 'antd/es/transfer/search';
 
 export function PokemonList({ pokemonList, onPokemonClick, backgroundColor }) {
 
@@ -13,13 +12,12 @@ export function PokemonList({ pokemonList, onPokemonClick, backgroundColor }) {
 
   const SearchBar = () => (
     <>
-      <Search
+      <Input.Search
         placeholder="Entrez le nom d'un Pokemon"
-        loading
         enterButton
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        style={{ width: "100px" }} />
+        style={{ width: "300px" }} />
     </>
   );
 
@@ -60,8 +58,8 @@ export function PokemonList({ pokemonList, onPokemonClick, backgroundColor }) {
       >
         <div className={style.container_list}>
           {filterPokemonList(pokemonList, searchValue).map((pokemon) => (
-            <div key={pokemon.name} style={{ width: 'calc(100% / 7)' }} className={style.item}>
-              <ItemPokemon img={pokemon.imageUrl} onclick={() => { onPokemonClick(pokemon.number); onClose(); }} nom={pokemon.name} id={pokemon.number} />
+            <div key={pokemon.name} className={style.item}>
+              <ItemPokemon img={pokemon.imageUrl} onclick={() => { onPokemonClick(pokemon.number); onClose(); setSearchValue(""); }} nom={pokemon.name} id={pokemon.number} />
             </div>
           ))}
 
