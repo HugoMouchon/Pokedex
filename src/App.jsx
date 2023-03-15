@@ -92,8 +92,12 @@ export function App() {
 
   // Fonction permettant de récupérer une liste de Pokemon
   async function fetchPokemonList() {
-    const listPokemons = await pokemonAPI.fetchPokemonList();
-    setListPokemon(listPokemons)
+    try {
+      const listPokemons = await pokemonAPI.fetchPokemonList();
+      setListPokemon(listPokemons)
+    } catch (error) {
+      console.log("Erreur durant la recupération de la liste Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -102,8 +106,12 @@ export function App() {
 
   // Fonction permettant de récupérer l'image du Pokemon
   async function fetchPokemonImage(pokemonID) {
-    const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
-    setImagePokemon(imageURL);
+    try {
+      const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
+      setImagePokemon(imageURL);
+    } catch (error) {
+      console.log("Erreur lors de la récupération de l'image du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -112,11 +120,15 @@ export function App() {
 
   // Fonction permettant de récupérer le nom du Pokemon
   async function fetchPokemonName(pokemonID) {
-    const names = await pokemonAPI.fetchPokemonName(pokemonID);
-    if (names.length > 0) {
-      setNamePokemon(names[0].name);
-    } else {
-      setNamePokemon("Pokemon Inconnu");
+    try {
+      const names = await pokemonAPI.fetchPokemonName(pokemonID);
+      if (names.length > 0) {
+        setNamePokemon(names[0].name);
+      } else {
+        setNamePokemon("Pokemon Inconnu");
+      }
+    } catch (error) {
+      console.log("Erreur lors de la récupération du nom du Pokemon");
     }
   }
 
@@ -126,8 +138,12 @@ export function App() {
 
   // Fonction permettant de récupérer le poid du Pokemon
   async function fetchPokemonWeight(pokemonID) {
-    const weight = await pokemonAPI.fetchPokemonWeight(pokemonID);
-    setWeightPokemon(weight);
+    try {
+      const weight = await pokemonAPI.fetchPokemonWeight(pokemonID);
+      setWeightPokemon(weight);
+    } catch (error) {
+      console.log("Erreur lors de la récupération du poid du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -136,8 +152,12 @@ export function App() {
 
   // Fonction permettant de récupérer la hauteur du Pokemon
   async function fetchPokemonHeight(pokemonID) {
-    const height = await pokemonAPI.fetchPokemonHeight(pokemonID);
-    setHeightPokemon(height);
+    try {
+      const height = await pokemonAPI.fetchPokemonHeight(pokemonID);
+      setHeightPokemon(height);
+    } catch (error) {
+      console.log("Erreur lors de la récupération de la hauteur du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -146,8 +166,12 @@ export function App() {
 
   // Fonction permettant de récupérer les abilitées du Pokemon et qui en affiche 1 maximum
   async function fetchPokemonAbilities(pokemonID) {
-    const abilities = await pokemonAPI.fetchPokemonAbilities(pokemonID);
-    setAbilitiesPokemon(abilities.slice(0, 1));
+    try {
+      const abilities = await pokemonAPI.fetchPokemonAbilities(pokemonID);
+      setAbilitiesPokemon(abilities.slice(0, 1));
+    } catch (error) {
+      console.log("Erreur lors de la récupération de l'abilité principale du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -156,8 +180,12 @@ export function App() {
 
   // Fonction permettant de récupérer le ou les types du Pokemon
   async function fetchPokemonTypes(pokemonID) {
-    const types = await pokemonAPI.fetchPokemonTypes(pokemonID);
-    setTypesPokemon(types.slice(0, 1));
+    try {
+      const types = await pokemonAPI.fetchPokemonTypes(pokemonID);
+      setTypesPokemon(types.slice(0, 1));
+    } catch (error) {
+      console.log("Erreur lors de la récupération du type du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -166,8 +194,12 @@ export function App() {
 
   // Fonction permettant de récupérer le numéro d'ordre du Pokemon
   async function fetchPokemonOrder(pokemonID) {
-    const ordre = await pokemonAPI.fetchPokemonOrder(pokemonID);
-    setOrderPokemon(ordre);
+    try {
+      const ordre = await pokemonAPI.fetchPokemonOrder(pokemonID);
+      setOrderPokemon(ordre);
+    } catch (error) {
+      console.log("Erreur lors de la récupération de L'ID du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -176,8 +208,12 @@ export function App() {
 
   // Fonction permettant de récupérer les stats du Pokemon
   async function fetchPokemonStats(pokemonID) {
-    const stats = await pokemonAPI.fetchPokemonStats(pokemonID);
-    setStatsPokemon(stats);
+    try {
+      const stats = await pokemonAPI.fetchPokemonStats(pokemonID);
+      setStatsPokemon(stats);
+    } catch (error) {
+      console.log("Erreur lors de la récupération des statistiques du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -186,8 +222,12 @@ export function App() {
 
   // Fonction permettant de récupérer la text d'ambiance (phrase d'accroche) du Pokemon.
   async function fetchPokemonFlavorText(pokemonID) {
-    const text = await pokemonAPI.fetchPokemonFlavorText(pokemonID);
-    setFlavorTextPokemon(text);
+    try {
+      const text = await pokemonAPI.fetchPokemonFlavorText(pokemonID);
+      setFlavorTextPokemon(text);
+    } catch (error) {
+      console.log("Erreur lors de la récupération du texte descriptif du Pokemon");
+    }
   }
 
   useEffect(() => {
@@ -229,25 +269,25 @@ export function App() {
       <div className={style.container_PreviousNext}>
 
         <div className={style.previousDesktop}>
-            <Button
-              onClick={previousClick}
-              variant="contained"
-              icon={<CaretLeftOutlined />}
-              color="primary"
-              className={style.btnPreviousDesktop}
-            >
-              {orderPokemon - 1} Précedent
-            </Button>
+          <Button
+            onClick={previousClick}
+            variant="contained"
+            icon={<CaretLeftOutlined />}
+            color="primary"
+            className={style.btnPreviousDesktop}
+          >
+            {orderPokemon - 1} Précedent
+          </Button>
         </div>
 
         <div className={style.previousMobile}>
-            <Button
-              onClick={previousClick}
-              icon={<CaretLeftOutlined />}
-              size='large'
-              style={{ borderRadius: 0, borderTopRightRadius: 30}}
-            >
-            </Button>
+          <Button
+            onClick={previousClick}
+            icon={<CaretLeftOutlined />}
+            size='large'
+            style={{ borderRadius: 0, borderTopRightRadius: 30 }}
+          >
+          </Button>
         </div>
 
         <div className={style.container_details}>
@@ -288,25 +328,25 @@ export function App() {
         </div>
 
         <div className={style.nextDesktop}>
-            <Button
-              onClick={nextClick}
-              variant="contained"
-              icon={<CaretRightOutlined />}
-              className={style.btnNextDesktop}
-              color="primary"
-            >
-              Suivant {orderPokemon + 1}
-            </Button>
+          <Button
+            onClick={nextClick}
+            variant="contained"
+            icon={<CaretRightOutlined />}
+            className={style.btnNextDesktop}
+            color="primary"
+          >
+            Suivant {orderPokemon + 1}
+          </Button>
         </div>
 
         <div className={style.nextMobile}>
-            <Button
-              onClick={nextClick}
-              icon={<CaretRightOutlined />}
-              size='large'
-              style={{ borderRadius: 0, borderTopLeftRadius: 30}}
-            >
-            </Button>
+          <Button
+            onClick={nextClick}
+            icon={<CaretRightOutlined />}
+            size='large'
+            style={{ borderRadius: 0, borderTopLeftRadius: 30 }}
+          >
+          </Button>
         </div>
 
       </div>
@@ -319,7 +359,7 @@ export function App() {
       </div>
       <PokemonList pokemonList={listePokemon} onPokemonClick={handlePokemonClick} backgroundColor={changeBackgroundColorDrawer} />
     </div>
-  );    
+  );
 }
 
 export default App
