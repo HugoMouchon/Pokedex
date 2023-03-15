@@ -1,8 +1,9 @@
 @use "../../sass/colors" as c;
+@use "../../sass/variables" as v;
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Press+Start+2P&display=swap');
 
 .text {
-    color: c.$text-color;
+    color: #5169a3;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     font-weight: 100;
@@ -13,4 +14,10 @@
     left: 0%;
     transform: translate(-40%, -20%);
     height: 35px;
+}
+
+@media (max-width: v.$xs) {
+    .text {
+        font-weight: 0;
+    }
 }
