@@ -202,6 +202,10 @@ h1 {
 }
 
 @media (max-width: v.$xs) {
+    .container {
+        overflow: hidden;
+    }
+
     .container_details {
         display: flex;
         flex-direction: column-reverse;
