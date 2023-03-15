@@ -228,15 +228,25 @@ export function App() {
 
       <div className={style.container_PreviousNext}>
 
-        <div className={style.previous}>
+        <div className={style.previousDesktop}>
             <Button
               onClick={previousClick}
               variant="contained"
               icon={<CaretLeftOutlined />}
               color="primary"
-              className={style.btnPrevious}
+              className={style.btnPreviousDesktop}
             >
               {orderPokemon - 1} Précedent
+            </Button>
+        </div>
+
+        <div className={style.previousMobile}>
+            <Button
+              onClick={previousClick}
+              icon={<CaretLeftOutlined />}
+              size='large'
+              style={{ borderRadius: 0, borderTopRightRadius: 30}}
+            >
             </Button>
         </div>
 
@@ -277,15 +287,25 @@ export function App() {
           </div>
         </div>
 
-        <div className={style.next}>
+        <div className={style.nextDesktop}>
             <Button
               onClick={nextClick}
               variant="contained"
               icon={<CaretRightOutlined />}
-              className={style.btnNext}
+              className={style.btnNextDesktop}
               color="primary"
             >
               Suivant {orderPokemon + 1}
+            </Button>
+        </div>
+
+        <div className={style.nextMobile}>
+            <Button
+              onClick={nextClick}
+              icon={<CaretRightOutlined />}
+              size='large'
+              style={{ borderRadius: 0, borderTopLeftRadius: 30}}
+            >
             </Button>
         </div>
 

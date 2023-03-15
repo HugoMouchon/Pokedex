@@ -1,4 +1,5 @@
 @use "../../sass/colors" as c;
+@use "../../sass/variables" as v;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 .container {
@@ -14,13 +15,16 @@
         margin: 0;
         padding: 0;
         width: 150px;
-
     }
 
     li {
         padding: 3px 0px;
         text-transform: capitalize;
+    }
 
+    .barValeurs {
+        display: flex;
+        width: 100%;
     }
 
     .progressBar {
@@ -31,10 +35,11 @@
     .nomination {
         padding-bottom: 9px;
     }
-
-    .valeurs {
-        margin-left: 25px;
-        padding-bottom: 9px;
+    
+    .statItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .divider {
@@ -52,10 +57,50 @@
             color: #fff;
         }
     }
+
+    .statsDesktop {
+        display: block;
+    }
+
+    .nameMobile {
+        display: none;
+    }
 }
 
-@media (max-width: 576px) {
+@media (max-width: v.$sd) {
     .container {
         width: 100vw;
+    }
+}
+
+@media (max-width: v.$xs) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    .titleStats {
+        display: none;
+    }
+
+    .statsDesktop {
+        display: none !important;
+    }
+
+    .nameMobile {
+        display: block !important;
+        padding-bottom: 6px;
+    }
+    .progressBar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .statItem {
+        height: 5px;
+        width: 80vw;
     }
 }

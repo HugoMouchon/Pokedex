@@ -1,3 +1,5 @@
+@use '../../sass/variables.scss' as v;
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -14,10 +16,18 @@
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: v.$xs) {
+    .navbar {
+      justify-content: center;
+    }
+    .container_PreviousNext {
+        display: flex;
+       
+    }
+  }
+
+@media (max-width: v.$sd) {
     .navbar {
       justify-content: center;
     }
   }
-
-
