@@ -17,7 +17,6 @@ export function NotificationPokemon({ text, name }) {
             icon: (
                 <img className={style.icone} src={icone} alt="pokeball" /> // Icone pokeball
             ),
-            style: { backgroundColor: "#fff", color: "black" },
             placement: placement,
 });
     };
@@ -29,7 +28,6 @@ return (
             type="primary"
             shape="circle"
             onClick={openNotification}
-            style={{ backgroundColor: '#fff', color: '#1b8740' }}
             className={style.notificationButton}
         >
             ?

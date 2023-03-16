@@ -1,8 +1,10 @@
+@use "../../sass/colors" as c;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 
+// badge
 .chips {
     padding: 2px 8px;
-    color: #fff;
+    color: c.$text-color;
     font-weight: 400;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;

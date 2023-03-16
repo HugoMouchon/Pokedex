@@ -45,7 +45,7 @@ export function PokemonList({ pokemonList, onPokemonClick, backgroundColor }) {
 
 
   return (
-    // Bouton qui ouvre la fenetre modal et affiche la liste de pokemon, ce bouton est accompagné du composant crée auparavant avec l'image pokedex
+    // Bouton qui ouvre la fenetre modal et affiche la liste de pokemon, ce bouton est accompagné du composant crée auparavant avec l'image pokedex animé
     <> {/** Fragment qui remplace la div  */}
       <Space>
         <button className={style.button}

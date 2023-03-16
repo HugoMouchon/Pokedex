@@ -4,7 +4,7 @@
 
 // Description
 .text {
-    color: #5169a3;
+    color: c.$text-description;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     font-weight: 100;
@@ -16,6 +16,15 @@
     left: 0%;
     transform: translate(-40%, -20%);
     height: 35px;
+}
+
+.notificationButton {
+    background-color: c.$bg-color;
+    color: c.$icone-notification;
+
+    &:hover {
+        background-color: c.$bg-hover-icone-notification !important;
+    }
 }
 
  // Responsive pour les écrans Mobile à 360px

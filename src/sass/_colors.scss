@@ -1,2 +1,39 @@
+/**
+    Application Générale
+*/
+
 // COuleur du texte principal
 $text-color: #fff;
+
+// COuleur de foond principal
+$bg-color: #fff;
+
+/**
+    Barre de defilement de la liste Pokemon
+*/
+
+// Couleur de fond de l'objet cliquable de la barre défilement
+$bg-objet-scrollBar: #ccc;
+
+//Couleur de fond de l'objet cliquable de la barre défilement lors du survol
+$bg-objet-hover-scrollBar: #aaa;
+
+// Couleur de fond de la barre de défilement
+$bg-scrollBar: #aaaaaa5c;
+
+/*
+    Bouton notification
+**/
+
+// Couleur de l'icone notification
+$icone-notification: #3c5aa6;
+
+// Couleur de fond de l'icone notification au survol
+$bg-hover-icone-notification: #3c5aa6;
+
+/**
+    Texte notification
+*/
+
+// Couleur du texte descriptif du Pokemon
+$text-description: #5169a3;

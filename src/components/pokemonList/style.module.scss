@@ -1,4 +1,5 @@
 @use '../../sass/variables' as v;
+@use '../../sass/colors' as c;
 
 @font-face {
     font-family: 'fontPokemon';
@@ -55,18 +56,18 @@ li {
 
 /* Apparence de la barre de défilement */
 ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: c.$bg-objet-scrollBar;
     border-radius: 10px;
 }
 
 /* Apparence de la barre de défilement au survol */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa;
+    background-color: c.$bg-objet-hover-scrollBar;
 }
 
 /* Apparence de la barre de défilement de fond */
 ::-webkit-scrollbar-track {
-    background-color: #aaaaaa5c;
+    background-color: c.$bg-scrollBar;
     border-radius: 10px;
 }
 

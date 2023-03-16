@@ -38,19 +38,19 @@ export default function PokemonStats({ stats }) {
             <div className={style.barValeurs}>
                 <div className={style.progressBar}>
                     {stats.map((stat) => (
-                        
+
                         <li key={stat.stat.url} >
                             <span className={style.nameMobile}>{stat.stat.name}</span>
                             <div className={style.statItem}>
-                            {/**  Composant Progress qui affiche les bar de progression de la bibliothèque "Ant Design" */}
-                            <Progress
-                                percent={stat.base_stat}
-                                width={"100%"}
-                                strokeWidth={14}
-                                showInfo={false}
-                                strokeColor={"#fff"}
-                            />
-                            <span className={style.baseStatValue}>{stat.base_stat}</span>
+                                {/**  Composant Progress qui affiche les bar de progression de la bibliothèque "Ant Design" */}
+                                <Progress
+                                    percent={stat.base_stat}
+                                    width={"100%"}
+                                    strokeWidth={14}
+                                    showInfo={false}
+                                    strokeColor={"#fff"}
+                                />
+                                <span className={style.baseStatValue}>{stat.base_stat}</span>
                             </div>
                         </li>
                     ))}
