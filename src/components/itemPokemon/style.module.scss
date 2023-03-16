@@ -1,3 +1,4 @@
+// Container principale
 .container {
     display: flex;
     flex-direction: column;
@@ -6,11 +7,12 @@
     cursor: pointer;
     padding: 5px;
 
+    // Image
     img {
         height: 100px;
         width: 100%;
     }
-
+    // Nom
     h4 {
         margin: 0;
     }

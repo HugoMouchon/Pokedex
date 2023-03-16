@@ -1,4 +1,5 @@
 @use '../../sass/variables' as v;
+
 @font-face {
     font-family: 'fontPokemon';
     src: url('../../fonts/PokemonSolid.ttf') format('truetype');
@@ -6,27 +7,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 
+// Container principale
 .container_list {
     display: flex;
     flex-wrap: wrap;
 }
 
+// Card
 .item {
     margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out;
     width: calc(100% / 7);
+    transition: transform 0.3s ease-in-out;
+
 }
 
+// Card au survol
 .item:hover {
     -ms-transform: scale(1);
     -webkit-transform: scale(1);
     transform: scale(1.1);
 }
 
+// liste
 li {
     list-style: none;
 }
 
+// bouton
 .button {
     cursor: pointer;
     border: "none";
@@ -63,6 +70,7 @@ li {
     border-radius: 10px;
 }
 
+// Responsive pour les écrans à 576px
 @media (max-width: v.$sd) {
     .item {
         margin-bottom: 20px;
@@ -71,6 +79,7 @@ li {
     }
 }
 
+ // Responsive pour les écrans Mobile à 360px
 @media (max-width: v.$xs) {
     .item {
         margin-bottom: 20px;

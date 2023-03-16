@@ -1,9 +1,11 @@
+// Import du fichier partiel "colors" & "variables" Sass.
 @use "./sass/_colors" as c;
 @use "./sass/_variables" as v;
+
+// Police Roboto
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
+// Police open Sans
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Poppins:wght@300&display=swap');
-
-
 
 .container_PreviousNext {
     display: flex;
@@ -114,8 +116,6 @@ h1 {
     display: none;
 }
 
-// flavorText
-
 .container_flavorText {
     display: flex;
     flex-direction: column;
@@ -178,7 +178,7 @@ h1 {
     margin-top: 15px;
 }
 
-
+// Responsive pour les écrans de 576px
 @media (max-width: v.$sd) {
     .container_details {
         width: 100vw;
@@ -201,6 +201,7 @@ h1 {
     }
 }
 
+// Responsive pour les écrans Mobile de 360px.
 @media (max-width: v.$xs) {
     .container {
         overflow: hidden;

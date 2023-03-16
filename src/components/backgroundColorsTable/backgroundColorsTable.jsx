@@ -1,4 +1,9 @@
 
+/** Tableau associatif qui contient des objets ayant trois propriétés : 
+ 1/ le nom exactement le même que le type du pokemon 
+ 2/ la couleur dégradé du fond de l'application en RGB
+ 3/ la couleur de fond de la fenetre modal (Composant Drawer) en HEXADECIMAL
+ */ 
 export const backgroundColorsTable = [
     {
         name: "normal", color: "linear-gradient(180deg, rgb(203, 198, 152) 20%, rgba(170, 166, 127, 1) 100%)", bgDrawer: "#aaa67f",

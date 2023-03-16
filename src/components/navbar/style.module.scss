@@ -1,33 +1,26 @@
 @use '../../sass/variables.scss' as v;
 
+// Navbar
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100px;
-    padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0 30px;
 }
 
+// Logo
 .navbar__logo {
-    width: 160px;
-    
-    img{
-        width: 100%;
-    }
+  width: 160px;
+
+  img {
+    width: 100%;
+  }
 }
 
-@media (max-width: v.$xs) {
-    .navbar {
-      justify-content: center;
-    }
-    .container_PreviousNext {
-        display: flex;
-       
-    }
-  }
-
+// Responsive pour les écrans de 576px
 @media (max-width: v.$sd) {
-    .navbar {
-      justify-content: center;
-    }
+  .navbar {
+    justify-content: center;
   }
+}

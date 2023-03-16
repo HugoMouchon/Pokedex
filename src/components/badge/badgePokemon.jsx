@@ -1,6 +1,10 @@
 // Manger 5 fruits et légumes par jours !
 import style from './style.module.scss';
 
+/** Tableau associatif qui contient des objets ayant deux propriétés : 
+ 1/ le nom exactement le même que le type du pokemon
+ 2/ Sa couleur associé
+ */ 
 export const colorsTable = [
     {
         name: "normal", color: "#AAA67F",
@@ -58,6 +62,7 @@ export const colorsTable = [
     },
 ];
 
+// Composant qui affiche le type d'un pokemon et qui créer un bagde de couleur différente tout autour selon celui ci
 export default function BadgePokemon({ types }) {
     return (
         <div className={style.container}>
