@@ -1,7 +1,7 @@
 import style from './style.module.scss';
 import '../src/sass/global.scss';
 import React, { useEffect, useState, useRef } from 'react';
-import NavBar from './components/navbar/navbar';
+import Header from './components/Header/Header';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
 import BadgePokemon from './components/badge/badgePokemon';
@@ -11,6 +11,7 @@ import NotificationPokemon from './components/notificationPokemon/notificationPo
 import { backgroundColorsTable } from './components/backgroundColorsTable/backgroundColorsTable';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { gsap } from 'gsap';
+
 
 export function App() {
   /*Déclaration des différents constantes avec l'utilisation du hook useState() afin de récupérer les informations du pokemon:
@@ -287,7 +288,7 @@ export function App() {
       style={{ background: `${changeBackgroundColor}` }} // Change la couleur de fond par rapport au type du Pokemon
     >
       <div className={style.header}>
-        <NavBar onSubmit={fetchPokemonName} />
+        <Header onSubmit={fetchPokemonName} />
       </div>
 
       <div className={style.container_PreviousNext}>
