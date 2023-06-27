@@ -1,7 +1,7 @@
 import style from './style.module.scss';
 import '../src/sass/global.scss';
 import React, { useEffect, useState, useRef } from 'react';
-import Header from './components/Header/Header';
+import Header from './components/Header/header';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
 import BadgePokemon from './components/badge/badgePokemon';
@@ -12,9 +12,8 @@ import { backgroundColorsTable } from './components/backgroundColorsTable/backgr
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { gsap } from 'gsap';
 
-
 export function App() {
-  /*Déclaration des différents constantes avec l'utilisation du hook useState() afin de récupérer les informations du pokemon:
+  /*Déclaration de plusieurs constantes avec l'utilisation du hook useState() afin de stocker les différentes informations du pokemon:
     1/ L'image
     2/ Le nom
     3/ Le poid
@@ -48,7 +47,7 @@ export function App() {
 */
   const [numberPokemon, setNumberPokemon] = useState(1);
 
-  // Utilisation du hooks useRef pour définir l'element de référence (ici l'image et le nom du pokemon ) afin de l'animer frâce à la librairie GSAP
+  // Utilisation du hooks useRef pour définir l'element de référence (ici l'image et le nom du pokemon ) afin de l'animer grâce à la librairie GSAP
   const imageRef = useRef(null);
   const nameRef = useRef(null);
 
