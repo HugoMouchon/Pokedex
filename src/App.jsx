@@ -57,9 +57,7 @@ export function App() {
       return typeObject ? typeObject.color : "grey";
     });
     setChangeBackgroundColor(backgroundColors);
-  }, [typesPokemon]);
 
-  useEffect(() => {
     const backgroundColorsDrawer = typesPokemon.map((type) => {
       const typeObject2 = backgroundColorsTable.find((obj) => obj.name === type.type.name);
       return typeObject2 ? typeObject2.bgDrawer : "grey";
@@ -80,7 +78,7 @@ export function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
   const previousClick = () => {
     if (numberPokemon === 1) {
@@ -108,9 +106,9 @@ export function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
-  const handlePokemonClick = (pokemonId) => {
+  const   handlePokemonClick = (pokemonId) => {
     setNumberPokemon(pokemonId);
   };
 
@@ -157,11 +155,6 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonImage() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement l'image si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonImage(numberPokemon);
-  }, [numberPokemon]);
-
   // Utilisation d'une fonction asynchrone permettant de récupérer le nom du pokemon, données stockée dans la variable "names", si il n'existe pas, un message s'affiche à la place et/ou si il y a une erreur technique qui se produit pendant l'appel de cette fonction une erreure sera afficher dans la console de l'utilisateur
   async function fetchPokemonName(pokemonID) {
     try {
@@ -181,11 +174,6 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonName() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement le nom si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonName(numberPokemon);
-  }, [numberPokemon])
-
   // Utilisation d'une fonction asynchrone permettant de récupérer le poid du pokemon, données stockée dans la variable "weight", si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonWeight(pokemonID) {
     try {
@@ -196,11 +184,6 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonWeight() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement le poid si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonWeight(numberPokemon);
-  }, [numberPokemon])
-
   // Utilisation d'une fonction asynchrone permettant de récupérer la hauteur du pokemon, données stockée dans la variable "height", si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonHeight(pokemonID) {
     try {
@@ -210,10 +193,6 @@ export function App() {
       console.log("Erreur lors de la récupération de la hauteur du Pokemon");
     }
   }
-  // Appel de la fonction fetchPokemonHeight() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement la hauteur si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonHeight(numberPokemon);
-  }, [numberPokemon])
 
   // Utilisation d'une fonction asynchrone permettant de récupérer les abilités du pokemon, données stockée dans la variable "abilities", mais ne garde que le premier de la liste. Si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonAbilities(pokemonID) {
@@ -224,10 +203,6 @@ export function App() {
       console.log("Erreur lors de la récupération de l'abilité principale du Pokemon");
     }
   }
-  // Appel de la fonction fetchPokemonAbilities() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement la liste d'abilités si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonAbilities(numberPokemon);
-  }, [numberPokemon])
 
   // Utilisation d'une fonction asynchrone permettant de récupérer le ou les types du pokemon, données stockée dans la variable "types", mais ne garde que le premier de la liste. Si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonTypes(pokemonID) {
@@ -239,11 +214,6 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonTypes() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement la liste de types si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonTypes(numberPokemon);
-  }, [numberPokemon])
-
   // Utilisation d'une fonction asynchrone permettant de récupérer le numéro d'ordre du pokemon, données stockée dans la variable "ordre", si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonOrder(pokemonID) {
     try {
@@ -253,10 +223,6 @@ export function App() {
       console.log("Erreur lors de la récupération de L'ID du Pokemon");
     }
   }
-  // Appel de la fonction fetchPokemonOrder() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement l'ordre si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonOrder(numberPokemon);
-  }, [numberPokemon])
 
   // Utilisation d'une fonction asynchrone permettant de récupérer une tableau de statistiques du pokemon, données stockée dans la variable "stats", si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
   async function fetchPokemonStats(pokemonID) {
@@ -268,9 +234,17 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonStats() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement les différentes statistiques si ce dernier change de valeur
+  // Appel des fonctions fetch mise à jours à chaque changements de pokemon
   useEffect(() => {
     fetchPokemonStats(numberPokemon);
+    fetchPokemonFlavorText(numberPokemon);
+    fetchPokemonOrder(numberPokemon);
+    fetchPokemonTypes(numberPokemon);
+    fetchPokemonAbilities(numberPokemon);
+    fetchPokemonHeight(numberPokemon);
+    fetchPokemonWeight(numberPokemon);
+    fetchPokemonName(numberPokemon);
+    fetchPokemonImage(numberPokemon);
   }, [numberPokemon])
 
   // Utilisation d'une fonction asynchrone permettant de récupérer le texte descriptif du pokemon, données stockée dans la variable "text", si une erreur se produit pendant l'appel avec une erreur sera afficher dans la console de l'utilisateur
@@ -283,10 +257,6 @@ export function App() {
     }
   }
 
-  // Appel de la fonction fetchPokemonFlavorText() qui prend en paramètre le nombre pokemon (initialisé à 1 par défaut) et qui mettra à jours automatiquement le texte descriptif si ce dernier change de valeur
-  useEffect(() => {
-    fetchPokemonFlavorText(numberPokemon);
-  }, [numberPokemon])
 
   // Fonction permettant d'ajouter un hashtag et un ou des zéros devant le numéro d'ordre du pokemon
   function addZeros(orderPokemon) {
