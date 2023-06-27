@@ -1,6 +1,6 @@
 import style from './style.module.scss';
 import '../src/sass/global.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import NavBar from './components/navbar/navbar';
 import { pokemonAPI } from './api/pokemonAPI';
 import PokemonStats from './components/stats/pokemonStats';
@@ -10,6 +10,7 @@ import PokemonList from './components/pokemonList/pokemonList';
 import NotificationPokemon from './components/notificationPokemon/notificationPokemon';
 import { backgroundColorsTable } from './components/backgroundColorsTable/backgroundColorsTable';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
+import { gsap } from 'gsap';
 
 export function App() {
   /*Déclaration des différents constantes avec l'utilisation du hook useState() afin de récupérer les informations du pokemon:
@@ -46,6 +47,9 @@ export function App() {
 */
   const [numberPokemon, setNumberPokemon] = useState(1);
 
+  // Utilisation du hooks useRef pour définir l'element de référence (ici l'image du pokemon) afin de l'animer frâce à la librairie GSAP
+  const imageRef = useRef(null);
+
   useEffect(() => {
     const backgroundColors = typesPokemon.map((type) => {
       const typeObject = backgroundColorsTable.find((obj) => obj.name === type.type.name);
@@ -75,7 +79,7 @@ export function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [numberPokemon]);
+  }, []);
 
   const previousClick = () => {
     if (numberPokemon === 1) {
@@ -102,7 +106,7 @@ export function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [numberPokemon]);
+  }, []);
 
   const handlePokemonClick = (pokemonId) => {
     setNumberPokemon(pokemonId);
@@ -127,6 +131,24 @@ export function App() {
   async function fetchPokemonImage(pokemonID) {
     try {
       const imageURL = await pokemonAPI.fetchPokemonImage(pokemonID);
+
+      gsap.to(imageRef.current, {
+        x: '100%',
+        opacity: 0,
+        duration: 0, // Animation immédiate sans durée
+        onComplete: () => {
+          setImagePokemon(imageURL);
+          gsap.fromTo(
+            imageRef.current,
+            { x: '100%', opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.3, // Durée de l'animation en secondes
+            }
+          );
+        }
+      });
       setImagePokemon(imageURL);
     } catch (error) {
       console.log("Erreur lors de la récupération de l'image du Pokemon");
@@ -348,7 +370,7 @@ export function App() {
           </div>
 
           <div className={style.container_image}>
-            <img className={style.image} src={imagePokemon} alt="" /> {/** Image du Pokemon */}
+            <img ref={imageRef} className={style.image} src={imagePokemon} alt="" /> {/** Image du Pokemon */}
             <span className={style.number}>{addZeros(orderPokemon)}</span> {/** fonction rajoutant un # et 1 ou 2 zéros devant le numéro du pokemon */}
             <NotificationPokemon name={namePokemon} text={flavorTextPokemon} /> {/** Composant qui affiche une phrase descriptif du pokemon */}
           </div>
