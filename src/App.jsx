@@ -47,8 +47,9 @@ export function App() {
 */
   const [numberPokemon, setNumberPokemon] = useState(1);
 
-  // Utilisation du hooks useRef pour définir l'element de référence (ici l'image du pokemon) afin de l'animer frâce à la librairie GSAP
+  // Utilisation du hooks useRef pour définir l'element de référence (ici l'image et le nom du pokemon ) afin de l'animer frâce à la librairie GSAP
   const imageRef = useRef(null);
+  const nameRef = useRef(null);
 
   useEffect(() => {
     const backgroundColors = typesPokemon.map((type) => {
@@ -86,6 +87,7 @@ export function App() {
       return numberPokemon;
     }
     setNumberPokemon(numberPokemon - 1);
+
   }
 
   // Fonction qui permet mettre à jours "numberPokemon" en l'incrémentant de 1 à chaque click.
@@ -166,6 +168,11 @@ export function App() {
       const names = await pokemonAPI.fetchPokemonName(pokemonID);
       if (names.length > 0) {
         setNamePokemon(names[0].name);
+        gsap.fromTo(
+          nameRef.current,
+          { y: '100%', opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3 }
+        );
       } else {
         setNamePokemon("Pokemon Inconnu");
       }
@@ -348,7 +355,7 @@ export function App() {
                 </div>
               ))}
             </div>
-            <h1>{namePokemon}</h1> {/** Nom du pokemon */}
+            <h1 ref={nameRef}>{namePokemon}</h1> {/** Nom du pokemon */}
             <div className={style.container_nomination1}>
               <div>
                 <p>Poid : </p>
